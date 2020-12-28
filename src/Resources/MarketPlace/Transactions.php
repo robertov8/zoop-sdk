@@ -28,22 +28,18 @@ class Transactions extends Zoop
      * do marketplace
      *
      * @return bool|array
-     * @throws \Exception
+     * @throws GuzzleHttp\Exception\ClientException
      */
     public function getAllTransactions()
     {
-        try {
-            $request = $this->configurations['guzzle']->request(
-                'GET', '/v1/marketplaces/'. $this->configurations['marketplace']. '/sellers/' . $this->configurations['auth']['on_behalf_of'] .'/transactions'
-            );
-            $response = \json_decode($request->getBody()->getContents(), true);
-            if($response && is_array($response)){
-                return $response;
-            }
-            return false;
-        } catch (\Exception $e){            
-            return $this->ResponseException($e);
+        $request = $this->configurations['guzzle']->request(
+            'GET', '/v1/marketplaces/'. $this->configurations['marketplace']. '/sellers/' . $this->configurations['auth']['on_behalf_of'] .'/transactions'
+        );
+        $response = \json_decode($request->getBody()->getContents(), true);
+        if($response && is_array($response)){
+            return $response;
         }
+        return false;
     }
 
     /**
@@ -55,21 +51,17 @@ class Transactions extends Zoop
      * @param string $transaction
      *
      * @return array|bool
-     * @throws \Exception
+     * @throws GuzzleHttp\Exception\ClientException
      */
     public function getTransaction($transaction)
     {
-        try {
-            $request = $this->configurations['guzzle']->request(
-                'GET', '/v1/marketplaces/'. $this->configurations['marketplace']. '/transactions/'. $transaction
-            );
-            $response = \json_decode($request->getBody()->getContents(), true);
-            if($response && is_array($response)){
-                return $response;
-            }
-            return false;
-        } catch (\Exception $e){            
-            return $this->ResponseException($e);
+        $request = $this->configurations['guzzle']->request(
+            'GET', '/v1/marketplaces/'. $this->configurations['marketplace']. '/transactions/'. $transaction
+        );
+        $response = \json_decode($request->getBody()->getContents(), true);
+        if($response && is_array($response)){
+            return $response;
         }
+        return false;
     }
 }

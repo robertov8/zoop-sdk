@@ -97,26 +97,22 @@ class CreditCard extends Zoop
      * @param null|string $referenceId
      *
      * @return array|bool|void
-     * @throws \Exception
+     * @throws GuzzleHttp\Exception\ClientException
      */
     public function payCreditCard(array $card, $referenceId = null)
     {
         /**
          * Adiciona o pacerlamento ao cartão de credito mantendo a integridade com o funcionamento atual.
          */
-        try {
-            $payment = $this->prepareCreditCard($card, $referenceId);
-            $request = $this->configurations['guzzle']->request(
-                'POST', '/v1/marketplaces/'. $this->configurations['marketplace']. '/transactions',
-                ['json' => $payment]
-            );
-            $response = \json_decode($request->getBody()->getContents(), true);
-            if($response && is_array($response)){
-                return $response;
-            }
-            return false;
-        } catch (\Exception $e){            
-            return $this->ResponseException($e);
+        $payment = $this->prepareCreditCard($card, $referenceId);
+        $request = $this->configurations['guzzle']->request(
+            'POST', '/v1/marketplaces/'. $this->configurations['marketplace']. '/transactions',
+            ['json' => $payment]
+        );
+        $response = \json_decode($request->getBody()->getContents(), true);
+        if($response && is_array($response)){
+            return $response;
         }
+        return false;
     }
 }
