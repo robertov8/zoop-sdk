@@ -1,7 +1,8 @@
 <?php
-namespace Zoop\Marketplace;
+namespace Zoop\Resources\MarketPlace;
 
-use Zoop\Zoop;
+use Zoop\Core\Zoop;
+
 /**
  * Transactions class
  * 
