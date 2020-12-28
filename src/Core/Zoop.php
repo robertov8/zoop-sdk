@@ -120,7 +120,6 @@ abstract class Zoop
                     && $method != 'getAllBundle'
                     && $method != 'getBundle'
                     && $method != 'getBundles'
-                    && $method != 'ResponseException'
                     ){
                         $bundlesArray[$bundleKey][] = $method;
                         $bundlesArray['binary'][] = $method;
@@ -174,11 +173,4 @@ abstract class Zoop
         return $this->hookBundle($bundle, $name, $arguments);
     }
 
-    public function ResponseException(\Exception $e)
-    {
-        if(!in_array('getResponse', \get_class_methods($e))){
-            throw new \Exception($e->getMessage(), 1);
-        }
-        throw new \Exception(\json_encode(\json_decode($e->getResponse()->getBody()->getContents(), true)), 1);
-    }
 }

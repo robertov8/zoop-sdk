@@ -28,23 +28,19 @@ class Buyers extends Zoop
      * @param array $user
      *
      * @return bool|array
-     * @throws \Exception
+     * @throws GuzzleHttp\Exception\ClientException
      */
     public function createBuyer(array $user)
     {
-        try {
-            $request = $this->configurations['guzzle']->request(
-                'POST', '/v1/marketplaces/'. $this->configurations['marketplace']. '/buyers', 
-                ['json' => $user]
-            );
-            $response = \json_decode($request->getBody()->getContents(), true);
-            if($response && is_array($response)){
-                return $response;
-            }
-            return false;
-        } catch (\Exception $e){            
-            return $this->ResponseException($e);
+        $request = $this->configurations['guzzle']->request(
+            'POST', '/v1/marketplaces/'. $this->configurations['marketplace']. '/buyers',
+            ['json' => $user]
+        );
+        $response = \json_decode($request->getBody()->getContents(), true);
+        if($response && is_array($response)){
+            return $response;
         }
+        return false;
     }
 
     /**
@@ -54,22 +50,18 @@ class Buyers extends Zoop
      * ('não realiza associação com o vendedor')
      *
      * @return bool|array
-     * @throws \Exception
+     * @throws GuzzleHttp\Exception\ClientException
      */
     public function getAllBuyers()
     {
-        try {
-            $request = $this->configurations['guzzle']->request(
-                'GET', '/v1/marketplaces/'. $this->configurations['marketplace']. '/buyers'
-            );
-            $response = \json_decode($request->getBody()->getContents(), true);
-            if($response && is_array($response)){
-                return $response;
-            }
-            return false;
-        } catch (\Exception $e){            
-            return $this->ResponseException($e);
+        $request = $this->configurations['guzzle']->request(
+            'GET', '/v1/marketplaces/'. $this->configurations['marketplace']. '/buyers'
+        );
+        $response = \json_decode($request->getBody()->getContents(), true);
+        if($response && is_array($response)){
+            return $response;
         }
+        return false;
     }
 
     /**
@@ -81,22 +73,18 @@ class Buyers extends Zoop
      * @param string $userId
      *
      * @return bool|array
-     * @throws \Exception
+     * @throws GuzzleHttp\Exception\ClientException
      */
     public function getBuyer($userId)
     {
-        try {
-            $request = $this->configurations['guzzle']->request(
-                'GET', '/v1/marketplaces/'. $this->configurations['marketplace']. '/buyers/' . $userId
-            );
-            $response = \json_decode($request->getBody()->getContents(), true);
-            if($response && is_array($response)){
-                return $response;
-            }
-            return false;
-        } catch (\Exception $e){            
-            return $this->ResponseException($e);
+        $request = $this->configurations['guzzle']->request(
+            'GET', '/v1/marketplaces/'. $this->configurations['marketplace']. '/buyers/' . $userId
+        );
+        $response = \json_decode($request->getBody()->getContents(), true);
+        if($response && is_array($response)){
+            return $response;
         }
+        return false;
     }
 
     /**
@@ -108,21 +96,17 @@ class Buyers extends Zoop
      * @param $userId
      *
      * @return bool|mixed|void
-     * @throws \Exception
+     * @throws GuzzleHttp\Exception\ClientException
      */
     public function deleteBuyer($userId)
     {
-        try {
-            $request = $this->configurations['guzzle']->request(
-                'DELETE', '/v1/marketplaces/'. $this->configurations['marketplace']. '/buyers/' . $userId
-            );
-            $response = \json_decode($request->getBody()->getContents(), true);
-            if($response && is_array($response)){
-                return $response;
-            }
-            return false;
-        } catch (\Exception $e){
-            return $this->ResponseException($e);
+        $request = $this->configurations['guzzle']->request(
+            'DELETE', '/v1/marketplaces/'. $this->configurations['marketplace']. '/buyers/' . $userId
+        );
+        $response = \json_decode($request->getBody()->getContents(), true);
+        if($response && is_array($response)){
+            return $response;
         }
+        return false;
     }
 } 

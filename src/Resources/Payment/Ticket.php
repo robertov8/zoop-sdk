@@ -69,31 +69,27 @@ class Ticket extends Zoop
      * @param null|string $referenceId
      *
      * @return array|bool
-     * @throws \Exception
+     * @throws GuzzleHttp\Exception\ClientException
      */
     private function processTicket(array $ticket, $userId, $referenceId = null)
     {
         if(!is_null($referenceId)){
             $ticket['reference_id'] = $referenceId;
         }
-        try {
-            $ticket = $this->prepareTicket($ticket, $userId);
-            $request = $this->configurations['guzzle']->request(
-                'POST', '/v1/marketplaces/'. $this->configurations['marketplace']. '/transactions', 
-                ['json' => $ticket]
-            );
-            $response = \json_decode($request->getBody()->getContents(), true);
-            if($response && is_array($response)){
-                return [
-                    'id' => $response['id'],
-                    'ticketId' => $response['payment_method']['id'],
-                    'status' => $response['status'],
-                ];
-            }
-            return false;
-        } catch (\Exception $e){            
-            return $this->ResponseException($e);
+        $ticket = $this->prepareTicket($ticket, $userId);
+        $request = $this->configurations['guzzle']->request(
+            'POST', '/v1/marketplaces/'. $this->configurations['marketplace']. '/transactions',
+            ['json' => $ticket]
+        );
+        $response = \json_decode($request->getBody()->getContents(), true);
+        if($response && is_array($response)){
+            return [
+                'id' => $response['id'],
+                'ticketId' => $response['payment_method']['id'],
+                'status' => $response['status'],
+            ];
         }
+        return false;
     }
 
     /**
@@ -108,31 +104,27 @@ class Ticket extends Zoop
      * @param null|string $referenceId
      *
      * @return array|bool
-     * @throws \Exception
+     * @throws GuzzleHttp\Exception\ClientException
      */
     public function generateTicket(array $ticket, $userId, $referenceId = null)
     {
-        try {
-            $generatedTicket = $this->processTicket($ticket, $userId, $referenceId);
-            $request = $this->configurations['guzzle']->request(
-                'GET', '/v1/marketplaces/'. $this->configurations['marketplace']. '/boletos/' . $generatedTicket['ticketId']
+        $generatedTicket = $this->processTicket($ticket, $userId, $referenceId);
+        $request = $this->configurations['guzzle']->request(
+            'GET', '/v1/marketplaces/'. $this->configurations['marketplace']. '/boletos/' . $generatedTicket['ticketId']
+        );
+        $response = \json_decode($request->getBody()->getContents(), true);
+        if($response && is_array($response)){
+            return array(
+                'payment' => array(
+                    'id' => $generatedTicket['id'],
+                    'ticketId' => $generatedTicket['ticketId'],
+                    'url' => $response['url'],
+                    'barcode' => $response['barcode'],
+                    'status' => $generatedTicket['status']
+                ),
+                'userId' => $userId
             );
-            $response = \json_decode($request->getBody()->getContents(), true);
-            if($response && is_array($response)){
-                return array(
-                    'payment' => array(
-                        'id' => $generatedTicket['id'],
-                        'ticketId' => $generatedTicket['ticketId'],
-                        'url' => $response['url'],
-                        'barcode' => $response['barcode'],
-                        'status' => $generatedTicket['status']
-                    ),
-                    'userId' => $userId
-                );
-            }
-            return false;
-        } catch (\Exception $e){            
-            return $this->ResponseException($e);
         }
+        return false;
     }
 }
