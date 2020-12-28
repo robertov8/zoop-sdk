@@ -1,14 +1,15 @@
 <?php
 namespace Zoop;
 
-use Zoop\Zoop;
+use Zoop\Core\Zoop;
+
 /**
  * ZoopClient class
  *
- * Essa classe é resonsavel por ser usada como primeira camada
+ * Essa classe é responsável por ser usada como primeira camada
  * uma especie de guarda chuvas para todas as classes registradas
  * dentro de aplicação em formato de bundle, os bundles (classes que
- * podem ser chaamdas seus metodos publicos por essa class cliente
+ * podem ser chamadas seus métodos públicos por essa class cliente
  * são registrados dentro da classe Abstrata extendida pelo cliente
  * Zoop\Zoop).
  * 
@@ -36,7 +37,7 @@ use Zoop\Zoop;
  * @package ZoopClient
  * @version 1.0.0
  */
-class ZoopClient extends Zoop 
+class ZoopClient extends Zoop
 {
     public function __construct($configurations)
     {
