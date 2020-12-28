@@ -1,5 +1,5 @@
 <?php
-namespace Zoop;
+namespace Zoop\Core;
 
 /**
  * abstract Zoop class
