@@ -1,7 +1,8 @@
 <?php
-namespace Zoop\Payment;
+namespace Zoop\Resources\Payment;
 
-use Zoop\Zoop;
+use Zoop\Core\Zoop;
+
 /**
  * CreditCard class
  *
@@ -13,7 +14,7 @@ use Zoop\Zoop;
  * @author italodeveloper <italoaraujo788@gmail.com>
  * @version 1.0.0
  */
-class CreditCard extends Zoop 
+class CreditCard extends Zoop
 {
     public function __construct($configurations)
     {

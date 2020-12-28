@@ -1,6 +1,13 @@
 <?php
 namespace Zoop\Core;
 
+use Zoop\Resources\MarketPlace\Buyers;
+use Zoop\Resources\MarketPlace\Sellers;
+use Zoop\Resources\MarketPlace\Transactions;
+use Zoop\Payment\CreditCard;
+use Zoop\Payment\Ticket;
+use Zoop\WebHook\WebHook;
+
 /**
  * abstract Zoop class
  * 
@@ -39,12 +46,12 @@ abstract class Zoop
     private function getBundles()
     {
         return [
-            Marketplace\Transactions::class,
-            MarketPlace\Sellers::class,
-            WebHook\WebHook::class,
-            MarketPlace\Buyers::class,
-            Payment\CreditCard::class,
-            Payment\Ticket::class
+            Transactions::class,
+            Sellers::class,
+            WebHook::class,
+            Buyers::class,
+            CreditCard::class,
+            Ticket::class
         ];
     }
 
@@ -107,7 +114,7 @@ abstract class Zoop
             $bundleMethods = \get_class_methods($bundleKey);
             if(is_array($bundleMethods) && !empty($bundleMethods)){
                 foreach ($bundleMethods as $method) {
-                    if($method != '__construct' 
+                    if($method != '__construct'
                     && $method != '__call' 
                     && $method != 'hookBundle' 
                     && $method != 'getAllBundle'

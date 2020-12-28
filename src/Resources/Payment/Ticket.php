@@ -1,7 +1,8 @@
 <?php
-namespace Zoop\Payment;
+namespace Zoop\Resources\Payment;
 
-use Zoop\Zoop;
+use Zoop\Core\Zoop;
+
 /**
  * Ticket class
  * 

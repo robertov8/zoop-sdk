@@ -1,7 +1,8 @@
 <?php
-namespace Zoop\MarketPlace;
+namespace Zoop\Resources\MarketPlace;
 
-use Zoop\Zoop;
+use Zoop\Core\Zoop;
+
 /**
  * Class Sellers
  * 
@@ -65,7 +66,7 @@ class Sellers extends Zoop
                 return $response;
             }
             return false;
-        } catch (\Exception $e){            
+        } catch (\Exception $e){
             return $this->ResponseException($e);
         }
     }
