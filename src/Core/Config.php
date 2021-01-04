@@ -43,6 +43,7 @@ class Config
             'guzzle' => [
                 'base_uri' => 'https://api.zoop.ws',
                 'timeout' => 10,
+                'exceptions' => false,//Não deixar o Guzzle lançar excessão automáticamente
                 'headers' => [
                     'Authorization' => 'Basic ' . \base64_encode($token . ':')
                 ]

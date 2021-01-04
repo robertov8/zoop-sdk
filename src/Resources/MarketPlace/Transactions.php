@@ -64,4 +64,65 @@ class Transactions extends Zoop
         }
         return false;
     }
+
+    /**
+     * @param array $transaction
+     * @return array|false|mixed
+     * @throws GuzzleHttp\Exception\ClientException
+     */
+    public function postTransaction(array $transaction)
+    {
+        $request = $this->configurations['guzzle']->request(
+            'POST', '/v1/marketplaces/'. $this->configurations['marketplace']. '/transactions',
+            ['json' => $transaction]
+        );
+        $response = \json_decode($request->getBody()->getContents(), true);
+        if($response && is_array($response)){
+            return $response;
+        }
+        return false;
+    }
+
+    /**
+     * @param string $transactionId
+     * @return array|false|mixed
+     * @throws GuzzleHttp\Exception\ClientException
+     */
+    public function captureTransaction(string $transactionId, int $amount)
+    {
+        $request = $this->configurations['guzzle']->request(
+            'POST', '/v1/marketplaces/'. $this->configurations['marketplace']. '/transactions/'.$transactionId.'/capture',
+            ['json' => [
+                'on_behalf_of' => $this->configurations['auth']['on_behalf_of'],
+                'amount' => $amount
+            ]]
+        );
+        $response = \json_decode($request->getBody()->getContents(), true);
+        if($response && is_array($response)){
+            return $response;
+        }
+        return false;
+    }
+
+    /**
+     * @param string $transactionId
+     * @return array|false|mixed
+     * @throws GuzzleHttp\Exception\ClientException
+     */
+    public function refundTransaction(string $transactionId, int $amount)
+    {
+        $request = $this->configurations['guzzle']->request(
+            'POST', '/v1/marketplaces/'. $this->configurations['marketplace']. '/transactions/'.$transactionId.'/void',
+            ['json' => [
+                'on_behalf_of' => $this->configurations['auth']['on_behalf_of'],
+                'amount' => $amount
+            ]]
+        );
+        $response = \json_decode($request->getBody()->getContents(), true);
+        if($response && is_array($response)){
+            return $response;
+        }
+        return false;
+    }
+
 }
