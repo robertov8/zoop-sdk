@@ -88,6 +88,29 @@ class Buyers extends Zoop
     }
 
     /**
+     * function getBuyer
+     *
+     * Atualiza os dados do comprador
+     *
+     * @param string $userId
+     *
+     * @return bool|array
+     * @throws GuzzleHttp\Exception\ClientException
+     */
+    public function updateBuyer($userId, array $user)
+    {
+        $request = $this->configurations['guzzle']->request(
+            'PUT', '/v1/marketplaces/'. $this->configurations['marketplace']. '/buyers/' . $userId,
+            ['json' => $user]
+        );
+        $response = \json_decode($request->getBody()->getContents(), true);
+        if($response && is_array($response)){
+            return $response;
+        }
+        return false;
+    }
+
+    /**
      * function deleteBuyer
      *
      * Delta um usuario do marketplace utilizando como parametro

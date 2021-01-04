@@ -2,11 +2,12 @@
 namespace Zoop\Core;
 
 use Zoop\Resources\MarketPlace\Buyers;
+use Zoop\Resources\MarketPlace\Cards;
 use Zoop\Resources\MarketPlace\Sellers;
 use Zoop\Resources\MarketPlace\Transactions;
 use Zoop\Payment\CreditCard;
 use Zoop\Payment\Ticket;
-use Zoop\WebHook\WebHook;
+use Zoop\Resources\WebHook\WebHook;
 
 /**
  * abstract Zoop class
@@ -51,7 +52,8 @@ abstract class Zoop
             WebHook::class,
             Buyers::class,
             CreditCard::class,
-            Ticket::class
+            Ticket::class,
+            Cards::class
         ];
     }
 
