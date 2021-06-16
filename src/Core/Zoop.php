@@ -5,20 +5,20 @@ use Zoop\Resources\MarketPlace\Buyers;
 use Zoop\Resources\MarketPlace\Cards;
 use Zoop\Resources\MarketPlace\Sellers;
 use Zoop\Resources\MarketPlace\Transactions;
-use Zoop\Payment\CreditCard;
-use Zoop\Payment\Ticket;
+use Zoop\Resources\Payment\CreditCard;
+use Zoop\Resources\Payment\Ticket;
 use Zoop\Resources\WebHook\WebHook;
 
 /**
  * abstract Zoop class
- * 
+ *
  * Essa classe abstrata é responsavel pela magica do
  * pacopte de pagamentos ela abstrai todos os metodos das
  * classes registradas na função getBundles, e pertime
  * a qualquer classe que a extenda utilizar qualquer função
  * dos bundles registados, podendo assim se criar a classe
  * Zoop\ZoopClient que realiza todas as operações do pacote.
- * 
+ *
  * @package Zoop
  * @author italodeveloper <italoaraujo788@gmail.com>
  * @version 1.0.0
@@ -38,7 +38,7 @@ abstract class Zoop
 
     /**
      * function getBundles
-     * 
+     *
      * Registra todas as classes da biblioteca
      * em um array para serem listados para utilização
      *
@@ -62,7 +62,7 @@ abstract class Zoop
      *
      * Lista todos os bundles registados para observar se não existem funções
      * que se sobrescrevem
-     * 
+     *
      * @return array
      */
     public function checkBundlesRepeat()
@@ -77,7 +77,7 @@ abstract class Zoop
      *
      * Pega o noem do Bundle dono da função
      * que foi requisitada
-     * 
+     *
      * @param array $bundles
      * @param string $function
      * @return string|bool
@@ -100,7 +100,7 @@ abstract class Zoop
      * Lista todos os metodos que estão dentro dos Bundles
      * registados e lista todos os bundles também para serem
      * reutilizados.
-     * 
+     *
      * @return array
      */
     private function getAllBundle()
@@ -117,8 +117,8 @@ abstract class Zoop
             if(is_array($bundleMethods) && !empty($bundleMethods)){
                 foreach ($bundleMethods as $method) {
                     if($method != '__construct'
-                    && $method != '__call' 
-                    && $method != 'hookBundle' 
+                    && $method != '__call'
+                    && $method != 'hookBundle'
                     && $method != 'getAllBundle'
                     && $method != 'getBundle'
                     && $method != 'getBundles'
@@ -151,7 +151,7 @@ abstract class Zoop
 
     /**
      * gunction __call
-     * 
+     *
      * Pega metodos que estão fora dessa classe
      * porem que pertencem ao namespace e estão
      * registados no registro de bundles acima
