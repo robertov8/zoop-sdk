@@ -5,10 +5,10 @@ use Zoop\Core\Zoop;
 
 /**
  * Class Buyers
- * 
+ *
  * Essa classe é resposavel por lidar com os usuarios
  * dentro do marketplace ao nivel do marketplace zoop.
- * 
+ *
  * @package Zoop\MarketPlace
  * @author italodeveloper <italoaraujo788@gmail.com>
  * @version 1.0.0
@@ -87,6 +87,29 @@ class Buyers extends Zoop
         return false;
     }
 
+  /**
+   * function searchBuyer
+   *
+   * Busca os usuario por CPF/CNPJ
+   *
+   * @param string $taxpayerId
+   *
+   * @return bool|array
+   * @throws GuzzleHttp\Exception\ClientException
+   */
+  public function searchBuyer($taxpayerId)
+  {
+    $request = $this->configurations['guzzle']->request(
+      'GET', '/v1/marketplaces/'. $this->configurations['marketplace']. '/buyers/search',
+      ['query' => ['taxpayer_id' => $taxpayerId]]
+    );
+    $response = \json_decode($request->getBody()->getContents(), true);
+    if($response && is_array($response)){
+      return $response;
+    }
+    return false;
+  }
+
     /**
      * function getBuyer
      *
@@ -132,4 +155,4 @@ class Buyers extends Zoop
         }
         return false;
     }
-} 
+}
