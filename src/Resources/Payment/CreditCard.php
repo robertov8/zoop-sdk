@@ -9,7 +9,7 @@ use Zoop\Core\Zoop;
  * Essa classe é responsavel por realizar o pagamento
  * utilizando o cartão de credito, preparando e hidratando
  * o mesmo com os dados estaticos.
- * 
+ *
  * @package Zoop\Payment
  * @author italodeveloper <italoaraujo788@gmail.com>
  * @version 1.0.0
@@ -38,7 +38,7 @@ class CreditCard extends Zoop
             'currency' => 'BRL',
             'description' => $card['description'],
             'on_behalf_of' => $this->configurations['auth']['on_behalf_of'],
-            'statement_descriptor' => 'SEMINOVOS BH',
+            'statement_descriptor' => $card['statement_descriptor'],
             'payment_type' => 'credit',
             'source' => array(
                 'usage' => 'single_use',
@@ -68,7 +68,7 @@ class CreditCard extends Zoop
      * validateInstallment function
      *
      * Valida o parcelamento por cartão de credito.
-     * 
+     *
      * @param array $installment
      * @return bool
      */
