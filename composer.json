@@ -1,37 +1,42 @@
 {
-    "name": "robertov8/zoop-sdk",
-    "description": "SDK de pagamentos Zoop",
-    "license": "MIT",
-    "type": "library",
-    "keywords": [
-        "italodeveloper",
-        "zoop",
-        "payment",
-        "gateway "
-    ],
-    "authors": [
-        {
-            "name": "Ítalo Araújo",
-            "email": "italoaraujo@gmail.com"
-        }
-    ],
-    "config": {
-        "optimize-autoloader": true
+  "name": "robertov8/zoop-sdk",
+  "description": "SDK de pagamentos Zoop",
+  "license": "MIT",
+  "type": "library",
+  "keywords": [
+    "italodeveloper",
+    "robertov8",
+    "zoop",
+    "payment",
+    "gateway "
+  ],
+  "authors": [
+    {
+      "name": "Ítalo Araújo",
+      "email": "italoaraujo@gmail.com"
     },
-    "require": {
-        "php": ">=5.5",
-        "ext-curl": "*",
-        "ext-json": "*",
-        "psr/log": "^1.1",
-        "guzzlehttp/guzzle": ">=6.2",
-        "italodeveloper/guzzle-zend": "^1.2"
-    },
-    "require-dev": {
-        "zendframework/zend-http": ">=2.5"
-    },
-    "autoload": {
-        "psr-4": {
-            "Zoop\\": "src/"
-        }
+    {
+      "name": "Roberto Ribeiro",
+      "email": "robertoribeiro.code@gmail.com"
     }
+  ],
+  "config": {
+    "optimize-autoloader": true
+  },
+  "require": {
+    "php": ">=5.5",
+    "ext-curl": "*",
+    "ext-json": "*",
+    "psr/log": "^1.1",
+    "guzzlehttp/guzzle": ">=6.2",
+    "robertov8/guzzle-zend": "^1.2"
+  },
+  "require-dev": {
+    "zendframework/zend-http": ">=2.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "Zoop\\": "src/"
+    }
+  }
 }
